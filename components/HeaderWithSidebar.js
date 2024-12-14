@@ -295,7 +295,7 @@ export default function Layout({ children }) {
                   >
                     <AddIcon color="secondary" />
                   </ListItemIcon>
-                  <ListItemText primary="Send email" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
+                  <ListItemText primary="Sign up" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
                 </StyledListItemButton>
               </ListItem>
             </StyledLink>
