@@ -26,6 +26,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 import Switch from '@mui/material/Switch';
 import Link from 'next/link'; // Import Link
 import { supabase } from '../lib/supabase';  // Import Supabase client
@@ -241,7 +242,7 @@ export default function Layout({ children }) {
                         ...(!open && { mr: 'auto' }),
                       }}
                     >
-                      <AdminPanelSettingsIcon color="secondary" />
+                      <DateRangeIcon color="secondary" />
                     </ListItemIcon>
                     <ListItemText primary="Select Month" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
                   </StyledListItemButton>

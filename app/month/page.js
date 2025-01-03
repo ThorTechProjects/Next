@@ -15,7 +15,7 @@ const MyComponent = () => {
   };
 
   const fetchData = async () => {
-    const { data, error } = await supabase.from('your_table').select('*');
+      const { data, error } = await supabase.rpc('get_all_tables'); // RPC function to fetch table names
     if (error) {
       console.error('Error fetching data:', error.message);
     } else {
