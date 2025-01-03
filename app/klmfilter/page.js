@@ -38,6 +38,7 @@ export default function GetTablesWithData() {
   const [loading, setLoading] = useState(true); // Loading state indicator
   const tableContainerRef = useRef(null); // Ref for the table container
 
+  // Effect to fetch data whenever Supabase client is created or selected schema changes
   useEffect(() => {
     async function fetchAllTableNames() {
       try {
@@ -58,7 +59,7 @@ export default function GetTablesWithData() {
     }
 
     fetchAllTableNames();
-  }, []);
+  }, [supabase]); // Dependency on `supabase` to trigger the effect when it changes
 
   // Fetch data from all tables
   const fetchAllTablesData = async (tableNames) => {
@@ -117,6 +118,13 @@ export default function GetTablesWithData() {
     }
   };
 
+  // Handle schema change
+  const handleSchemaChange = (event) => {
+    const newSchema = event.target.value;
+    setSelectedSchema(newSchema); // Update selected schema
+    setSupabase(createSupabaseClientWithSchema(newSchema)); // Update Supabase client with the new schema
+  };
+
   const handleTableChange = (event) => {
     const tableName = event.target.value;
     setSelectedTable(tableName);
@@ -150,37 +158,6 @@ export default function GetTablesWithData() {
       filtered = filtered.filter(row => row['Employee Id'] && row['Employee Id'] === employeeId);
     }
     setFilteredData(filtered);
-  };
-
-  const handleDragStart = (event) => {
-    const tableContainer = tableContainerRef.current;
-    tableContainer.dataset.dragging = true;
-    tableContainer.dataset.startX = event.clientX;
-    tableContainer.dataset.scrollLeft = tableContainer.scrollLeft;
-  };
-
-  const handleDrag = (event) => {
-    const tableContainer = tableContainerRef.current;
-    if (tableContainer.dataset.dragging === 'true') {
-      const dx = event.clientX - tableContainer.dataset.startX;
-      tableContainer.scrollLeft = tableContainer.dataset.scrollLeft - dx;
-    }
-  };
-
-  const handleDragEnd = () => {
-    const tableContainer = tableContainerRef.current;
-    tableContainer.dataset.dragging = false;
-  };
-
-  const handleDoubleClick = () => {
-    const tableContainer = tableContainerRef.current;
-    if (!document.fullscreenElement) {
-      tableContainer.requestFullscreen().catch(err => {
-        console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-      });
-    } else {
-      document.exitFullscreen();
-    }
   };
 
   const downloadCSV = () => {
@@ -219,6 +196,19 @@ export default function GetTablesWithData() {
       <Button variant="contained" color="primary" onClick={downloadCSV}>
         Download CSV
       </Button>
+
+      <FormControl fullWidth>
+        <InputLabel>Choose Schema</InputLabel>
+        <Select
+          value={selectedSchema}
+          onChange={handleSchemaChange}
+          label="Choose Schema"
+        >
+          <MenuItem value="january_2025">January 2025</MenuItem>
+          <MenuItem value="december_2024">December 2024</MenuItem>
+          {/* Add more schemas here */}
+        </Select>
+      </FormControl>
       {error && <Alert severity="error">{error}</Alert>}
 
       {!loading && !error && (
@@ -276,11 +266,6 @@ export default function GetTablesWithData() {
           <TableContainer
             component={Paper}
             ref={tableContainerRef}
-            onMouseDown={handleDragStart}
-            onMouseMove={handleDrag}
-            onMouseUp={handleDragEnd}
-            onMouseLeave={handleDragEnd}
-            onDoubleClick={handleDoubleClick}
             sx={{ cursor: 'grab', overflow: 'auto', userSelect: 'none' }}
           >
             <Table>
@@ -294,8 +279,8 @@ export default function GetTablesWithData() {
               <TableBody>
                 {filteredData.map((row, rowIndex) => (
                   <TableRow key={rowIndex}>
-                    {Object.values(row).map((value, colIndex) => (
-                      <TableCell key={colIndex}>{value}</TableCell>
+                    {Object.keys(row).map((column, columnIndex) => (
+                      <TableCell key={columnIndex}>{row[column]}</TableCell>
                     ))}
                   </TableRow>
                 ))}
