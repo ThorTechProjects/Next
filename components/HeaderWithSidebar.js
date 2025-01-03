@@ -221,6 +221,33 @@ export default function Layout({ children }) {
           </DrawerHeader>
           <Divider />
           <List>
+              {/* Render KLM Filter only for admin users */}
+              {user && user.user_metadata.role === 'admin' && (
+              <StyledLink href="/month" passHref>
+                <ListItem disablePadding sx={{ display: 'block' }}>
+                  <StyledListItemButton
+                    sx={{
+                      minHeight: 48,
+                      px: 2.5,
+                      ...(open && { justifyContent: 'initial' }),
+                      ...(!open && { justifyContent: 'center' }),
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        justifyContent: 'center',
+                        ...(open && { mr: 3 }),
+                        ...(!open && { mr: 'auto' }),
+                      }}
+                    >
+                      <AdminPanelSettingsIcon color="secondary" />
+                    </ListItemIcon>
+                    <ListItemText primary="KLMFilter" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
+                  </StyledListItemButton>
+                </ListItem>
+              </StyledLink>
+            )}
             {/* Render KLM Filter only for admin users */}
             {user && user.user_metadata.role === 'admin' && (
               <StyledLink href="/klmfilter" passHref>
