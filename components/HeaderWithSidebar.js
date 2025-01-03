@@ -243,7 +243,7 @@ export default function Layout({ children }) {
                     >
                       <AdminPanelSettingsIcon color="secondary" />
                     </ListItemIcon>
-                    <ListItemText primary="KLMFilter" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
+                    <ListItemText primary="Select Month" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
                   </StyledListItemButton>
                 </ListItem>
               </StyledLink>
