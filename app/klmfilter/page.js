@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { createSupabaseClientWithSchema } from '../../lib/supabaseClient';
 import {
   Container,
   Typography,
