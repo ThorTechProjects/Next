@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabaseClient';
 import {
   Container,
   Typography,
@@ -23,6 +23,9 @@ import {
 } from '@mui/material';
 
 export default function GetTablesWithData() {
+  const [selectedSchema, setSelectedSchema] = useState('january_2025'); // Default schema
+  const [supabase, setSupabase] = useState(createSupabaseClientWithSchema(selectedSchema));
+
   const [tables, setTables] = useState([]); // Stores all table names
   const [selectedTable, setSelectedTable] = useState(''); // Stores the currently selected table
   const [tableData, setTableData] = useState([]); // Stores data from the selected table or all tables
