@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { createSupabaseClientWithSchema } from '../../supabaseClient';
+import { createSupabaseClientWithSchema } from '../../lib/supabaseClient';
 
 const MyComponent = () => {
   const [selectedSchema, setSelectedSchema] = useState('january_2025'); // Default schema
