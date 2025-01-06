@@ -247,7 +247,7 @@ export default function GetTablesWithData() {
         Download CSV
       </Button>
 
-      <FormControl fullWidth>
+      <FormControl fullWidth margin='normal'>
         <InputLabel>Choose Schema</InputLabel>
         <Select
           value={selectedSchema}
