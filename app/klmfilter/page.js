@@ -208,17 +208,16 @@ export default function GetTablesWithData() {
   };
 
   const toggleFullscreen = () => {
-    const tableContainer = tableContainerRef.current;
     if (!isFullscreen) {
-      // Enter fullscreen mode
-      if (tableContainer.requestFullscreen) {
-        tableContainer.requestFullscreen();
-      } else if (tableContainer.mozRequestFullScreen) {
-        tableContainer.mozRequestFullScreen(); // Firefox
-      } else if (tableContainer.webkitRequestFullscreen) {
-        tableContainer.webkitRequestFullscreen(); // Chrome, Safari, Opera
-      } else if (tableContainer.msRequestFullscreen) {
-        tableContainer.msRequestFullscreen(); // IE/Edge
+      // Enter fullscreen mode for the table container
+      if (tableContainerRef.current.requestFullscreen) {
+        tableContainerRef.current.requestFullscreen();
+      } else if (tableContainerRef.current.mozRequestFullScreen) {
+        tableContainerRef.current.mozRequestFullScreen(); // Firefox
+      } else if (tableContainerRef.current.webkitRequestFullscreen) {
+        tableContainerRef.current.webkitRequestFullscreen(); // Chrome, Safari, Opera
+      } else if (tableContainerRef.current.msRequestFullscreen) {
+        tableContainerRef.current.msRequestFullscreen(); // IE/Edge
       }
     } else {
       // Exit fullscreen mode
@@ -320,7 +319,8 @@ export default function GetTablesWithData() {
             sx={{
               cursor: 'grab',
               overflowX: 'auto', // Enable horizontal scrolling
-              overflowY: 'hidden', // Disable vertical scrolling
+              overflowY: isFullscreen ? 'auto' : 'visible', // Enable vertical scrolling in fullscreen mode
+              height: isFullscreen ? '100vh' : 'auto', // Fullscreen height for scrolling
               userSelect: 'none',
             }}
             onMouseDown={startDrag}
