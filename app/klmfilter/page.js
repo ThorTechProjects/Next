@@ -37,6 +37,8 @@ export default function GetTablesWithData() {
   const [error, setError] = useState(''); // Error message if any operation fails
   const [loading, setLoading] = useState(true); // Loading state indicator
   const tableContainerRef = useRef(null); // Ref for the table container
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
 
   // Effect to fetch data whenever Supabase client is created or selected schema changes
   useEffect(() => {
@@ -205,6 +207,33 @@ export default function GetTablesWithData() {
     tableContainer.style.cursor = 'grab';
   };
 
+  const toggleFullscreen = () => {
+    const tableContainer = tableContainerRef.current;
+    if (!isFullscreen) {
+      // Enter fullscreen mode
+      if (tableContainer.requestFullscreen) {
+        tableContainer.requestFullscreen();
+      } else if (tableContainer.mozRequestFullScreen) {
+        tableContainer.mozRequestFullScreen(); // Firefox
+      } else if (tableContainer.webkitRequestFullscreen) {
+        tableContainer.webkitRequestFullscreen(); // Chrome, Safari, Opera
+      } else if (tableContainer.msRequestFullscreen) {
+        tableContainer.msRequestFullscreen(); // IE/Edge
+      }
+    } else {
+      // Exit fullscreen mode
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen(); // Firefox
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen(); // Chrome, Safari, Opera
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen(); // IE/Edge
+      }
+    }
+    setIsFullscreen(!isFullscreen);
+  };
 
   return (
     <Container>
@@ -298,6 +327,8 @@ export default function GetTablesWithData() {
             onMouseMove={handleDrag}
             onMouseUp={stopDrag}
             onMouseLeave={stopDrag}
+            onDoubleClick={toggleFullscreen} // Add double-click listener for fullscreen
+
           >
             <Table>
               <TableHead>

@@ -297,7 +297,7 @@ export default function Layout({ children }) {
                   >
                     <CloudUploadIcon color="secondary" />
                   </ListItemIcon>
-                  <ListItemText primary="KLM" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
+                  <ListItemText primary="Upload" sx={{ color: theme.palette.text.primary, ...(open ? { opacity: 1 } : { opacity: 0 }) }} />
                 </StyledListItemButton>
               </ListItem>
             </StyledLink>
