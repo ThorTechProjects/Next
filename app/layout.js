@@ -5,7 +5,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>Next.js App with Material-UI</title>
+        <link rel="icon" href="/ThorTech.ico" />
+        <title>KLM Monthly Work</title>
       </head>
       <body>
         <Layout>{children}</Layout>
