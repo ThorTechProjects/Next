@@ -184,6 +184,28 @@ export default function GetTablesWithData() {
     URL.revokeObjectURL(url);
   };
 
+  const handleDrag = (e) => {
+    const tableContainer = tableContainerRef.current;
+    if (!tableContainer.isDragging) return;
+    const x = e.pageX - tableContainer.startX;
+    tableContainer.scrollLeft -= x * 2; // Adjust speed multiplier as needed
+    tableContainer.startX = e.pageX; // Update startX for smooth scrolling
+  };
+
+  const startDrag = (e) => {
+    const tableContainer = tableContainerRef.current;
+    tableContainer.isDragging = true;
+    tableContainer.startX = e.pageX;
+    tableContainer.style.cursor = 'grabbing';
+  };
+
+  const stopDrag = () => {
+    const tableContainer = tableContainerRef.current;
+    tableContainer.isDragging = false;
+    tableContainer.style.cursor = 'grab';
+  };
+
+
   return (
     <Container>
       <Backdrop open={loading} style={{ zIndex: 1300 }}>
@@ -266,7 +288,16 @@ export default function GetTablesWithData() {
           <TableContainer
             component={Paper}
             ref={tableContainerRef}
-            sx={{ cursor: 'grab', overflow: 'auto', userSelect: 'none' }}
+            sx={{
+              cursor: 'grab',
+              overflowX: 'auto', // Enable horizontal scrolling
+              overflowY: 'hidden', // Disable vertical scrolling
+              userSelect: 'none',
+            }}
+            onMouseDown={startDrag}
+            onMouseMove={handleDrag}
+            onMouseUp={stopDrag}
+            onMouseLeave={stopDrag}
           >
             <Table>
               <TableHead>
