@@ -15,7 +15,7 @@ const MyComponent = () => {
   };
 
   const fetchData = async () => {
-      const { data, error } = await supabase.rpc('get_all_tables'); // RPC function to fetch table names
+    const { data, error } = await supabase.rpc('get_all_tables'); // RPC function to fetch table names
     if (error) {
       console.error('Error fetching data:', error.message);
     } else {
@@ -26,6 +26,7 @@ const MyComponent = () => {
   return (
     <div>
       <select onChange={handleSchemaChange} value={selectedSchema}>
+        <option value="april_2025">January 2025</option>
         <option value="january_2025">January 2025</option>
         <option value="december_2024">December 2024</option>
         {/* Add more options for other schemas as needed */}
