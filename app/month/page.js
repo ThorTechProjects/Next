@@ -26,7 +26,7 @@ const MyComponent = () => {
   return (
     <div>
       <select onChange={handleSchemaChange} value={selectedSchema}>
-        <option value="april_2025">January 2025</option>
+        <option value="april_2025">April 2025</option>
         <option value="january_2025">January 2025</option>
         <option value="december_2024">December 2024</option>
         {/* Add more options for other schemas as needed */}
