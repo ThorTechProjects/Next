@@ -23,7 +23,7 @@ import {
 } from '@mui/material';
 
 export default function GetTablesWithData() {
-  const [selectedSchema, setSelectedSchema] = useState('january_2025'); // Default schema
+  const [selectedSchema, setSelectedSchema] = useState('may_2025'); // Default schema
   const [supabase, setSupabase] = useState(createSupabaseClientWithSchema(selectedSchema));
 
   const [tables, setTables] = useState([]); // Stores all table names
@@ -254,7 +254,7 @@ export default function GetTablesWithData() {
           onChange={handleSchemaChange}
           label="Choose Schema"
         >
-          <MenuItem value="may_2025">April 2025</MenuItem>
+          <MenuItem value="may_2025">May 2025</MenuItem>
           <MenuItem value="april_2025">April 2025</MenuItem>
           <MenuItem value="january_2025">January 2025</MenuItem>
           <MenuItem value="december_2024">December 2024</MenuItem>
