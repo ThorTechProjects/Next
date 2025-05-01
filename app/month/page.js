@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { createSupabaseClientWithSchema } from '../../lib/supabaseClient';
 
 const MyComponent = () => {
-  const [selectedSchema, setSelectedSchema] = useState('january_2025'); // Default schema
+  const [selectedSchema, setSelectedSchema] = useState('may_2025'); // Default schema
   const [supabase, setSupabase] = useState(createSupabaseClientWithSchema(selectedSchema));
 
   // Function to handle schema change
@@ -26,6 +26,7 @@ const MyComponent = () => {
   return (
     <div>
       <select onChange={handleSchemaChange} value={selectedSchema}>
+        <option value="may_2025">April 2025</option>
         <option value="april_2025">April 2025</option>
         <option value="january_2025">January 2025</option>
         <option value="december_2024">December 2024</option>

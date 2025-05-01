@@ -254,6 +254,7 @@ export default function GetTablesWithData() {
           onChange={handleSchemaChange}
           label="Choose Schema"
         >
+          <MenuItem value="may_2025">April 2025</MenuItem>
           <MenuItem value="april_2025">April 2025</MenuItem>
           <MenuItem value="january_2025">January 2025</MenuItem>
           <MenuItem value="december_2024">December 2024</MenuItem>
